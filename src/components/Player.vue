@@ -1,11 +1,11 @@
 <template>
   <div class="player">
-    <div class="normal-player">
+    <div class="normal-player" v-if="!toggleMini">
       <div class="background">
         <img width="100%" height="100%" src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg?max_age=2592000" alt="">
       </div>
       <div class="top">
-        <div class="back">
+        <div class="back" @click="togglePlayer">
           <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-zhankai"></use>
           </svg>
@@ -35,7 +35,7 @@
         </div>
         <div class="operators">
           <div class="icon-operators i-left">
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon i-small" aria-hidden="true">
               <use xlink:href="#icon-shangyishou"></use>
             </svg>
           </div>
@@ -45,15 +45,15 @@
             </svg>
           </div>
           <div class="icon-operators i-right">
-            <svg class="icon" aria-hidden="true">
+            <svg class="icon i-small" aria-hidden="true">
               <use xlink:href="#icon-kuaijin"></use>
             </svg>
           </div>
         </div>
       </div>
     </div>
-    <div class="mini-player">
-      <div class="icon-player">
+    <div class="mini-player" v-if="toggleMini">
+      <div class="icon-player" @click="togglePlayer">
         <img src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg?max_age=2592000"/>
       </div>
       <div class="text">
@@ -82,8 +82,13 @@ export default {
   name: 'Player',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App',
-      isPaused: true
+      isPaused: true,
+      toggleMini: true
+    }
+  },
+  methods: {
+    togglePlayer () {
+      this.toggleMini = !this.toggleMini
     }
   }
 }
@@ -210,6 +215,9 @@ export default {
           height 36px
           fill currentColor
           color $color-text-d
+          &.i-small
+            width 28px
+            height 28px
       .i-left
         text-align right
       .i-center

@@ -8,7 +8,7 @@ export default {
   name: 'TabSwiper',
   data () {
     return {
-      msg: 'Welcome to Your'
+
     }
   }
 }
