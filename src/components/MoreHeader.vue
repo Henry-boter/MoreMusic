@@ -19,8 +19,10 @@ export default {
 }
 </script>
 <style scoped lang="stylus" rel="stylesheet/stylus">
+  @import "../assets/stylus/theme.styl"
 .more-header
-  font-size 26px
+  font-size $font-size-large-x
   text-align center
   line-height 2
+  color $color-head-title
 </style>
