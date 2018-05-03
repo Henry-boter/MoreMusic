@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <more-header :title="headTitle"></more-header>
+    <more-header :title="headTitle">{{headTitle}}</more-header>
     <router-view/>
     <player></player>
   </div>
@@ -17,7 +17,7 @@ export default {
   },
   data () {
     return {
-      headTitle: 'MoreMusic'
+      headTitle: 'MORE MUSIC'
     }
   }
 }

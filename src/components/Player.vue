@@ -102,7 +102,7 @@ export default {
   right 0
   top 0
   bottom 0
-  z-index 150
+  z-index 1
   background $color-background
   .background
     position absolute
@@ -120,12 +120,13 @@ export default {
       position absolute
       top 0
       left 6px
-      z-index 50
+      z-index 1
       .icon
         width 22px
         height 22px
         display block
         padding 9px
+        fill: currentColor
         color $color-text
     .title
       width 70%
@@ -231,7 +232,7 @@ export default {
   position fixed
   left 0px
   bottom 0px
-  z-index 180
+  z-index 0
   width 100%
   height 60px
   border-top 1px solid $color-line
