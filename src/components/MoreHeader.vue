@@ -44,6 +44,12 @@ export default {
   display flex
   align-items center
   justify-content space-between
+  position fixed
+  width 100%
+  background-color $color-background
+  top 0
+  left 0
+  z-index 1
   .left
     width 50px
     height 50px

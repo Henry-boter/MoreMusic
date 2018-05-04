@@ -2,13 +2,13 @@
   <div class="swiper-box">
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slide" @click="selectItem(item)" v-for="(item, index) in listImg" :key="index">
+        <div class="swiper-slide" @click="selectItem(item)" v-for="(item, index) in albumlist" :key="index">
           <div class="swiper-slide-box">
             <div class="swiper-slide-wrapper" style="padding: 10px">
-              <div class="image" :style="{ backgroundImage: 'url(' + item.url + ')' }"></div>
-              <p class="vol">vol.984{{index}}</p>
-              <h1 class="title">青春的纪念碑</h1>
-              <p class="from">#独立民谣•创建于2018-04-20</p>
+              <div class="image" :style="{ backgroundImage: 'url(' + item.album_img + ')' }"></div>
+              <p class="vol">{{item.album_id}}</p>
+              <h1 class="title">{{item.album_name}}</h1>
+              <p class="from">#{{item.genre}} • 创建于{{item.aDate}}</p>
               <div>
                 <svg class="icon" aria-hidden="true">
                   <use xlink:href="#icon-bofang1"></use>
@@ -35,7 +35,8 @@ export default {
         {id: 2, url: 'http://p.qpic.cn/music_cover/y0Elj3m25QhKsCrLguvkxz3cuKjtUMdOD8RQIK1gza46Wkfrq8oiaEA/600?n=1'},
         {id: 3, url: 'http://p.qpic.cn/music_cover/s6ib7KHLTqdrU3UxaGALxNZk97uK8w7nHPAHr22ggibZnE1H9cvhO7Cw/600?n=1'},
         {id: 4, url: 'http://p.qpic.cn/music_cover/OxYJ3e12Q1MiaibkTa8iaSjoKTaj1NtVA1RlDe0A3yGjwCmbaKaIElczw/600?n=1'}
-      ]
+      ],
+      albumlist: []
     }
   },
   created () {
@@ -61,6 +62,8 @@ export default {
     getAlbumList () {
       console.log(albumlib)
       this.list = albumlib
+      console.log(albumlib.data.list)
+      this.albumlist = albumlib.data.list
     }
   }
 }
@@ -70,7 +73,7 @@ export default {
   .swiper-box
     width: 100vw
     overflow: hidden
-    margin-top: 2%
+    margin-top: 50px
     .swiper-container
       width 260%
       margin-left -80%
