@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import AlbumDetail from '@/components/AlbumDetail'
+import TabSwiper from '@/components/TabSwiper'
+import DataTest from '@/pages/DataTest'
 
 Vue.use(Router)
 
@@ -17,6 +19,12 @@ export default new Router({
           component: AlbumDetail
         }
       ]
+      name: 'TabSwiper',
+      component: TabSwiper
+    }, {
+      path: '/data',
+      name: 'data',
+      component: DataTest
     }
   ]
 })
