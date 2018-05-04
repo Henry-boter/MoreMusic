@@ -1,7 +1,7 @@
 <template>
   <transition name="slide">
     <div class="album">
-      <moreheader :showBack="true" @onBack="back">青春的纪念碑</moreheader>
+      <moreheader :showBack="true" @onBack="back">青春纪念碑</moreheader>
     </div>
   </transition>
 </template>
