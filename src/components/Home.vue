@@ -26,6 +26,7 @@
 <script>
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
+import {albumlib} from '@/data/songData'
 export default {
   data () {
     return {
@@ -37,8 +38,11 @@ export default {
       ]
     }
   },
+  created () {
+    this.getAlbumList()
+  },
   mounted () {
-    console.log('mounted', this)
+    // console.log('mounted', this)
     var swiper = new Swiper('.swiper-container', {
       loop: true,
       autoplay: false,
@@ -53,6 +57,10 @@ export default {
       this.$router.push({
         path: `/${item.id}`
       })
+    },
+    getAlbumList () {
+      console.log(albumlib)
+      this.list = albumlib
     }
   }
 }
