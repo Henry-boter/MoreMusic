@@ -56,13 +56,12 @@ export default {
   methods: {
     selectItem (item) {
       this.$router.push({
-        path: `/${item.id}`
+        path: `/${item.album_id}`,
+        query: {item}
       })
     },
     getAlbumList () {
-      console.log(albumlib)
       this.list = albumlib
-      console.log(albumlib.data.list)
       this.albumlist = albumlib.data.list
     }
   }
