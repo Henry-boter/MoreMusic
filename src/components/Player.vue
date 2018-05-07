@@ -1,6 +1,6 @@
 <template>
-  <div class="player">
-    <div class="normal-player" v-if="!toggleMini">
+  <div class="player" v-show="playlist.length>0">
+    <div class="normal-player" v-show="fullScreen">
       <div class="background">
         <img width="100%" height="100%" src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg?max_age=2592000" alt="">
       </div>
@@ -52,7 +52,7 @@
         </div>
       </div>
     </div>
-    <div class="mini-player" v-if="toggleMini">
+    <div class="mini-player" v-show="!fullScreen">
       <div class="icon-player" @click="togglePlayer">
         <img src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg?max_age=2592000"/>
       </div>
@@ -78,6 +78,7 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
 export default {
   name: 'Player',
   data () {
@@ -85,6 +86,12 @@ export default {
       isPaused: true,
       toggleMini: true
     }
+  },
+  computed: {
+    ...mapGetters([
+      'fullScreen',
+      'playlist'
+    ])
   },
   methods: {
     togglePlayer () {

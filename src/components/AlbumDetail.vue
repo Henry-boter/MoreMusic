@@ -16,7 +16,9 @@
           <use xlink:href="#icon-zhankai"></use>
         </svg>
         <p class="hr"></p>
-        <div class="song-item" v-for="(item, index) in albumDetail.songs" :key="item.songid">
+        <div class="song-item" v-for="(item, index) in albumDetail.songs"
+             :key="item.songid"
+             @click="selectItem(item, index)">
           <div class="left">{{index + 1}}.</div>
           <div class="right">
             <h1>{{item.songname}}  <span>{{item.albumdesc}}</span></h1>
@@ -29,6 +31,7 @@
 </template>
 <script>
 import Moreheader from '@/components/MoreHeader'
+import {mapActions} from 'vuex'
 export default {
   name: 'AlbumDetail',
   components: {
@@ -54,7 +57,17 @@ export default {
       this.$router.push({
         path: '/'
       })
-    }
+    },
+    selectItem (item, index) {
+      console.log(item)
+      this.selectPlay({
+        list: this.albumDetail.songs,
+        index: index
+      })
+    },
+    ...mapActions([
+      'selectPlay'
+    ])
   }
 }
 </script>
