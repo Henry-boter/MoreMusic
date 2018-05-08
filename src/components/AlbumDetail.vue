@@ -62,7 +62,7 @@ export default {
       console.log(item)
       this.selectPlay({
         list: this.albumDetail.songs,
-        index: index
+        index
       })
     },
     ...mapActions([
@@ -98,7 +98,7 @@ export default {
       background-color #fff
       border-radius 50%
   .desc-wrapper
-    padding 20px
+    padding 20px 20px 60px 20px
     .vol
       color $color-text-d
       font-size $font-size-medium

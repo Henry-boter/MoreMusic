@@ -1,64 +1,66 @@
 <template>
   <div class="player" v-show="playlist.length>0">
-    <div class="normal-player" v-show="fullScreen">
-      <div class="background">
-        <img width="100%" height="100%" src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg?max_age=2592000" alt="">
-      </div>
-      <div class="top">
-        <div class="back" @click="togglePlayer">
-          <svg class="icon" aria-hidden="true">
-            <use xlink:href="#icon-zhankai"></use>
-          </svg>
+    <transition name="normal">
+      <div class="normal-player" v-show="fullScreen">
+        <div class="background">
+          <img width="100%" height="100%" :src="currentSong.song_img" alt="">
         </div>
-        <h1 class="title">演员</h1>
-        <h2 class="subtitle">薛之谦</h2>
-      </div>
-      <div class="middle">
-        <div class="middle-l">
-          <div class="cd-wrapper">
-            <div class="cd">
-              <img class="image" src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg?max_age=2592000" alt="">
+        <div class="top">
+          <div class="back" @click="back">
+            <svg class="icon" aria-hidden="true">
+              <use xlink:href="#icon-zhankai"></use>
+            </svg>
+          </div>
+          <h1 class="title">{{currentSong.songname}}</h1>
+          <h2 class="subtitle">{{currentSong.singer}}</h2>
+        </div>
+        <div class="middle">
+          <div class="middle-l">
+            <div class="cd-wrapper">
+              <div class="cd">
+                <img class="image" :src="currentSong.song_img" alt="">
+              </div>
+            </div>
+            <div class="playing-lyric-wrapper">
+              <div class="playing-lyric">这里是歌词</div>
             </div>
           </div>
-          <div class="playing-lyric-wrapper">
-            <div class="playing-lyric">这里是歌词</div>
+        </div>
+        <div class="bottom">
+          <div class="progress-wrapper">
+            <span class="time time-l">0:00</span>
+            <div class="progress-bar-wrapper">
+              <span style="display: inline-block;height: 3px;width: 100%;background-color: gold"></span>
+            </div>
+            <span class="time time-r">4:21</span>
+          </div>
+          <div class="operators">
+            <div class="icon-operators i-left">
+              <svg class="icon i-small" aria-hidden="true">
+                <use xlink:href="#icon-shangyishou"></use>
+              </svg>
+            </div>
+            <div class="icon-operators i-center">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-bofang"></use>
+              </svg>
+            </div>
+            <div class="icon-operators i-right">
+              <svg class="icon i-small" aria-hidden="true">
+                <use xlink:href="#icon-kuaijin"></use>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
-      <div class="bottom">
-        <div class="progress-wrapper">
-          <span class="time time-l">0:00</span>
-          <div class="progress-bar-wrapper">
-            <span style="display: inline-block;height: 3px;width: 100%;background-color: gold"></span>
-          </div>
-          <span class="time time-r">4:21</span>
-        </div>
-        <div class="operators">
-          <div class="icon-operators i-left">
-            <svg class="icon i-small" aria-hidden="true">
-              <use xlink:href="#icon-shangyishou"></use>
-            </svg>
-          </div>
-          <div class="icon-operators i-center">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-bofang"></use>
-            </svg>
-          </div>
-          <div class="icon-operators i-right">
-            <svg class="icon i-small" aria-hidden="true">
-              <use xlink:href="#icon-kuaijin"></use>
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
+    </transition>
     <div class="mini-player" v-show="!fullScreen">
-      <div class="icon-player" @click="togglePlayer">
-        <img src="https://y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg?max_age=2592000"/>
+      <div class="icon-player" @click="open" >
+        <img :src="currentSong.song_img"/>
       </div>
-      <div class="text">
-        <h2 class="name">演员</h2>
-        <p class="desc">薛之谦</p>
+      <div class="text" @click="open">
+        <h2 class="name">{{currentSong.songname}}</h2>
+        <p class="desc">{{currentSong.singer}}</p>
       </div>
       <div class="control" @click="isPaused = !isPaused">
         <svg class="icon" aria-hidden="true" v-if="!isPaused">
@@ -74,11 +76,12 @@
         </svg>
       </div>
     </div>
+    <audio :src="currentSong.url" autoplay></audio>
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters, mapMutations} from 'vuex'
 export default {
   name: 'Player',
   data () {
@@ -90,13 +93,20 @@ export default {
   computed: {
     ...mapGetters([
       'fullScreen',
-      'playlist'
+      'playlist',
+      'currentSong'
     ])
   },
   methods: {
-    togglePlayer () {
-      this.toggleMini = !this.toggleMini
-    }
+    back () {
+      this.setFullScreen(false)
+    },
+    open () {
+      this.setFullScreen(true)
+    },
+    ...mapMutations({
+      setFullScreen: 'SET_FULL_SCREEN'
+    })
   }
 }
 </script>
@@ -109,7 +119,7 @@ export default {
   right 0
   top 0
   bottom 0
-  z-index 1
+  z-index 3
   background $color-background
   .background
     position absolute
@@ -180,7 +190,6 @@ export default {
             top 0
             width 100%
             height 100%
-            border-radius 50%
       .playing-lyric-wrapper
         width 80%
         margin 30px auto 0 auto
@@ -233,13 +242,23 @@ export default {
         text-align center
       .i-right
         text-align left
+  &.normal-enter-active, &.normal-leave-active
+    transition all 0.4s
+    .top, .bottom
+      transition all 0.4s cubic-bezier(0.86, 0.18, 0.82, 1.32)
+  &.normal-enter, &.normal-leave-to
+    opacity: 0
+    .top
+      transform: translate3d(0, -100px, 0)
+    .bottom
+      transform: translate3d(0, 100px, 0)
 .mini-player
   display flex
   align-items center
   position fixed
   left 0px
   bottom 0px
-  z-index 0
+  z-index 3
   width 100%
   height 60px
   border-top 1px solid $color-line
