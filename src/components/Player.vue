@@ -54,6 +54,7 @@
         </div>
       </div>
     </transition>
+    <transition name="mini"></transition>
     <div class="mini-player" v-show="!fullScreen">
       <div class="icon-player" @click="open" >
         <img :src="currentSong.song_img"/>
@@ -263,6 +264,10 @@ export default {
   height 60px
   border-top 1px solid $color-line
   background $color-background
+  &.mini-enter-active, &.mini-leave-attive
+    transition all .4s
+  &.mini-enter, &.mini-leave-to
+    opacity 0
   .icon-player
     flex 0 0 40px
     width 40px
@@ -300,4 +305,5 @@ export default {
         width 20px
       &:active
         color $color-text-r
+
 </style>
