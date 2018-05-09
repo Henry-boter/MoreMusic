@@ -1,6 +1,11 @@
 <template>
   <div class="player" v-show="playlist.length>0">
-    <transition name="normal">
+    <transition name="normal"
+                @enter="enter"
+                @after-enter="afterEnter"
+                @leave="leave"
+                @after-leave="afterLeave"
+    >
       <div class="normal-player" v-show="fullScreen">
         <div class="background">
           <img width="100%" height="100%" :src="currentSong.song_img" alt="">
@@ -16,8 +21,8 @@
         </div>
         <div class="middle">
           <div class="middle-l">
-            <div class="cd-wrapper">
-              <div class="cd">
+            <div class="cd-wrapper" ref="cdWrapper">
+              <div class="cd" :class="Cls">
                 <img class="image" :src="currentSong.song_img" alt="">
               </div>
             </div>
@@ -41,8 +46,9 @@
               </svg>
             </div>
             <div class="icon-operators i-center">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-bofang"></use>
+              <svg class="icon" aria-hidden="true" @click="togglePlaying">
+                <use xlink:href="#icon-zanting" v-if="playing"></use>
+                <use xlink:href="#icon-bofang" v-else></use>
               </svg>
             </div>
             <div class="icon-operators i-right">
@@ -57,18 +63,16 @@
     <transition name="mini"></transition>
     <div class="mini-player" v-show="!fullScreen">
       <div class="icon-player" @click="open" >
-        <img :src="currentSong.song_img"/>
+        <img :class="Cls" :src="currentSong.song_img"/>
       </div>
       <div class="text" @click="open">
         <h2 class="name">{{currentSong.songname}}</h2>
         <p class="desc">{{currentSong.singer}}</p>
       </div>
-      <div class="control" @click="isPaused = !isPaused">
-        <svg class="icon" aria-hidden="true" v-if="!isPaused">
-          <use xlink:href="#icon-bofang"></use>
-        </svg>
-        <svg class="icon" aria-hidden="true" v-if="isPaused">
-          <use xlink:href="#icon-zanting"></use>
+      <div class="control" @click="togglePlaying">
+        <svg class="icon" aria-hidden="true" >
+          <use xlink:href="#icon-zanting" v-if="playing"></use>
+          <use xlink:href="#icon-bofang" v-else></use>
         </svg>
       </div>
       <div class="control">
@@ -77,12 +81,13 @@
         </svg>
       </div>
     </div>
-    <audio :src="currentSong.url" autoplay></audio>
+    <audio ref="audio" :src="currentSong.url"></audio>
   </div>
 </template>
 
 <script>
 import {mapGetters, mapMutations} from 'vuex'
+import animations from 'create-keyframe-animation'
 export default {
   name: 'Player',
   data () {
@@ -91,11 +96,28 @@ export default {
       toggleMini: true
     }
   },
+  watch: {
+    currentSong () {
+      this.$nextTick(() => {
+        this.$refs.audio.play()
+      })
+    },
+    playing (newPlaying) {
+      const audio = this.$refs.audio
+      this.$nextTick(() => {
+        newPlaying ? audio.play() : audio.pause()
+      })
+    }
+  },
   computed: {
+    Cls () {
+      return this.playing ? 'play ' : 'play pause'
+    },
     ...mapGetters([
       'fullScreen',
       'playlist',
-      'currentSong'
+      'currentSong',
+      'playing'
     ])
   },
   methods: {
@@ -105,8 +127,65 @@ export default {
     open () {
       this.setFullScreen(true)
     },
+    enter (el, done) {
+      const {x, y, scale} = this._getPosAndScale()
+      let animation = {
+        0: {
+          transform: `translate3d(${x}, ${y}, 0) scale(${scale})`
+        },
+        60: {
+          transform: `translate3d(0, 0, 0) scale(1.2)`
+        },
+        100: {
+          transform: `translate3d(0, 0, 0) scale(1)`
+        }
+      }
+      animations.registerAnimation({
+        name: 'move',
+        animation,
+        presets: {
+          duration: 400,
+          easing: 'linear'
+        }
+      })
+      animations.runAnimation(this.$refs.cdWrapper, 'move', done)
+    },
+    afterEnter () {
+      animations.unregisterAnimation('move')
+      this.$refs.cdWrapper.style.animation = ''
+    },
+    leave (el, done) {
+      this.$refs.cdWrapper.style.transition = 'all 0.4s'
+      const {x, y, scale} = this._getPosAndScale()
+      this.$refs.cdWrapper.style.transform = `translate3d(${x}px, ${y}px, 0) scale(${scale})`
+      this.$refs.cdWrapper.addEventListener('transitionend', done)
+    },
+    afterLeave () {
+      this.$refs.cdWrapper.style.transition = ''
+      this.$refs.cdWrapper.style.transform = ''
+    },
+    // 获取元素位置和缩放尺寸
+    _getPosAndScale () {
+      // 小圆
+      const targetWidth = 40
+      const paddingLeft = 20
+      const paddingBottom = 10
+      // 大圆
+      const paddingTop = 80
+      const width = window.innerWidth * 0.8
+      // 缩放比例
+      const scale = targetWidth / width
+      // 坐标
+      const x = -(window.innerWidth / 2 - paddingLeft)
+      const y = window.innerHeight - paddingTop - width / 2 - paddingBottom
+      return {x, y, scale}
+    },
+    togglePlaying () {
+      this.setPlayingState(!this.playing)
+    },
     ...mapMutations({
-      setFullScreen: 'SET_FULL_SCREEN'
+      setFullScreen: 'SET_FULL_SCREEN',
+      setPlayingState: 'SET_PLAYING_STATE'
     })
   }
 }
@@ -185,12 +264,17 @@ export default {
           box-sizing border-box
           border 10px solid rgba(255,255,255,0.2)
           border-radius 50%
+          &.play
+            animation rotate 20s linear infinite
+          &.pause
+            animation-play-state paused
           .image
             position absolute
             left 0
             top 0
             width 100%
             height 100%
+            border-radius 50%
       .playing-lyric-wrapper
         width 80%
         margin 30px auto 0 auto
@@ -241,6 +325,8 @@ export default {
       .i-center
         padding 0 20px
         text-align center
+        .icon:active
+          color $color-text-r
       .i-right
         text-align left
   &.normal-enter-active, &.normal-leave-active
@@ -276,6 +362,10 @@ export default {
       width 40px
       height 40px
       border-radius 50%
+      &.play
+        animation: rotate 10s linear infinite
+      &.pause
+        animation-play-state: paused
   .text
     display flex
     flex-direction column
@@ -305,5 +395,9 @@ export default {
         width 20px
       &:active
         color $color-text-r
-
+  @keyframes rotate
+    0%
+      transform : rotate(0)
+    100%
+      transform rotate(360deg)
 </style>

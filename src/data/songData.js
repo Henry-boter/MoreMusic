@@ -67,11 +67,11 @@ export const albumlib = {
         "songs": [
           {
             "songid": 100211,
-            "songname": "夜的第七章",
+            "songname": "简单爱",
             "albumdesc": "",
             "singer": "周杰伦",
-            "song_img": "//y.gtimg.cn/music/photo_new/T002R300x300M000002jLGWe16Tf1H.jpg?max_age=2592000",
-            "url": "http://dl.stream.qqmusic.qq.com/C4000010ibBn4bYFTk.m4a?vkey=932250AD9A9AA3C8757BB9BEBFC93197E20924CC1FC38DAA91C5AEAF745B3BF48B320B2964D7256F038C630215D2D8CAC133B3BAB966D731&guid=7662885136&uin=0&fromtag=66"
+            "song_img": "https://y.gtimg.cn/music/photo_new/T002R300x300M000000I5jJB3blWeN.jpg?max_age=2592000",
+            "url": "http://dl.stream.qqmusic.qq.com/C4000009BCJK1nRaad.m4a?vkey=A8C395999747B6881C9C776765F8DE90B6FB05AD828AC92DAE3A77639397724F8BB3929C45355D42E8CB61AE5A6EACCF9E4D3105B13097CE&guid=7662885136&uin=0&fromtag=66"
           },
           {
             "songid": 100212,
