@@ -33,15 +33,15 @@
         </div>
         <div class="bottom">
           <div class="progress-wrapper">
-            <span class="time time-l">0:00</span>
+            <span class="time time-l">{{format(currentTime)}}</span>
             <div class="progress-bar-wrapper">
-              <span style="display: inline-block;height: 3px;width: 100%;background-color: gold"></span>
+              <progress-bar :percent="percent"></progress-bar>
             </div>
-            <span class="time time-r">4:21</span>
+            <span class="time time-r">{{format(duration)}}</span>
           </div>
           <div class="operators">
             <div class="icon-operators i-left">
-              <svg class="icon i-small" aria-hidden="true">
+              <svg class="icon i-small" aria-hidden="true" @click="prev">
                 <use xlink:href="#icon-shangyishou"></use>
               </svg>
             </div>
@@ -52,7 +52,7 @@
               </svg>
             </div>
             <div class="icon-operators i-right">
-              <svg class="icon i-small" aria-hidden="true">
+              <svg class="icon i-small" aria-hidden="true" @click="next">
                 <use xlink:href="#icon-kuaijin"></use>
               </svg>
             </div>
@@ -81,19 +81,30 @@
         </svg>
       </div>
     </div>
-    <audio ref="audio" :src="currentSong.url"></audio>
+    <audio ref="audio"
+           :src="currentSong.url"
+           @canplay="ready"
+           @error="error"
+           @timeupdate="updateTime"
+    ></audio>
   </div>
 </template>
 
 <script>
 import {mapGetters, mapMutations} from 'vuex'
+import progressBar from '@/common/progress-bar.vue'
 import animations from 'create-keyframe-animation'
 export default {
   name: 'Player',
+  components: {
+    progressBar
+  },
   data () {
     return {
-      isPaused: true,
-      toggleMini: true
+      songReady: false,
+      currentTime: 0,
+      duration: 0,
+      percent: 0
     }
   },
   watch: {
@@ -113,11 +124,15 @@ export default {
     Cls () {
       return this.playing ? 'play ' : 'play pause'
     },
+    disableCls () {
+      return this.songReady ? '' : 'disabled'
+    },
     ...mapGetters([
       'fullScreen',
       'playlist',
       'currentSong',
-      'playing'
+      'playing',
+      'currentIndex'
     ])
   },
   methods: {
@@ -181,11 +196,69 @@ export default {
       return {x, y, scale}
     },
     togglePlaying () {
+      if (!this.songReady) {
+        return
+      }
       this.setPlayingState(!this.playing)
+    },
+    next () {
+      if (!this.songReady) {
+        return
+      }
+      let index = this.currentIndex + 1
+      if (index === this.playlist.length) {
+        index = 0
+      }
+      this.setCurrentIndex(index)
+      if (!this.playing) {
+        this.togglePlaying()
+      }
+      this.songReady = false
+    },
+    prev () {
+      if (!this.songReady) {
+        return
+      }
+      let index = this.currentIndex - 1
+      if (index === -1) {
+        index = this.playlist.length - 1
+      }
+      this.setCurrentIndex(index)
+      if (!this.playing) {
+        this.togglePlaying()
+      }
+      this.songReady = false
+    },
+    ready () {
+      this.songReady = true
+    },
+    error () {
+      this.songReady = true
+    },
+    updateTime (e) {
+      this.currentTime = e.target.currentTime
+      this.duration = e.target.duration
+      this.percent = e.target.currentTime / e.target.duration
+    },
+    format (interval) {
+      interval = interval | 0
+      const minute = interval / 60 | 0
+      const second = this._pad(interval % 60)
+      return `${minute}:${second}`
+    },
+    // 缺位补零
+    _pad (num, n = 2) {
+      let len = num.toString().length
+      while (len < n) {
+        num = '0' + num
+        len++
+      }
+      return num
     },
     ...mapMutations({
       setFullScreen: 'SET_FULL_SCREEN',
-      setPlayingState: 'SET_PLAYING_STATE'
+      setPlayingState: 'SET_PLAYING_STATE',
+      setCurrentIndex: 'SET_CURRENT_INDEX'
     })
   }
 }
@@ -316,7 +389,9 @@ export default {
           width 36px
           height 36px
           fill currentColor
-          color $color-text-d
+          color $color-text-w
+          &.disabled
+            color $color-text-d
           &.i-small
             width 28px
             height 28px

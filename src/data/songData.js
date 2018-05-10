@@ -5,7 +5,7 @@ export const albumlib = {
     "list": [
       {
         "album_id": 1001,
-        "album_img": "//y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg?max_age=2592000",
+        "album_img": "http://p3.music.126.net/ULlwJ2drOfYv-f6-_7jGGQ==/3250156379592966.jpg?param=130y130",
         "album_name": "绅士",
         "public_time": "2018-05-02",
         "aDate": "2015-06-05",
@@ -25,24 +25,24 @@ export const albumlib = {
             "songname": "绅士",
             "albumdesc": "《是！尚先生》电视剧插曲",
             "singer": "薛之谦",
-            "song_img": "//y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg?max_age=2592000",
-            "url": "http://dl.stream.qqmusic.qq.com/C400001CG3wA3QkuJS.m4a?vkey=741556F6C4AA01A6562E7F3A1681A8FCF24463CB1442DF4B008EE018BA0F0DE4351C77FB6A2263D65D3998B30DE75901FE769A24BEC0CC11&guid=7662885136&uin=0&fromtag=66"
+            "song_img": "http://p3.music.126.net/ULlwJ2drOfYv-f6-_7jGGQ==/3250156379592966.jpg?param=130y130",
+            "url": "http://m10.music.126.net/20180510230359/43d81b5b79395a5f6098a7049064a29b/ymusic/f972/f22a/2eab/a86f84b177c122c899f9a36231b81d95.mp3"
           },
           {
             "songid": 1000112,
             "songname": "演员",
             "albumdesc": "",
             "singer": "薛之谦",
-            "song_img": "//y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg?max_age=2592000",
-            "url": "http://dl.stream.qqmusic.qq.com/C400001Qu4I30eVFYb.m4a?vkey=DDCD6BAADB95B80D817F0FFFE257DAF75D22207DC5E7D797B162DA22057BB21F49242D733F6E5244338F807B856C15CC8BEEF03D3BB199DC&guid=7662885136&uin=0&fromtag=66"
+            "song_img": "http://p3.music.126.net/ULlwJ2drOfYv-f6-_7jGGQ==/3250156379592966.jpg?param=130y130",
+            "url": "http://m10.music.126.net/20180510225908/76fda2502957b35b67b1fd114dc65f29/ymusic/0dd9/d28b/e089/fcbab41f4900212553c5b610c617da2a.mp3"
           },
           {
             "songid": 1000113,
-            "songname": "下雨了",
+            "songname": "意外",
             "albumdesc": "",
             "singer": "薛之谦",
-            "song_img": "//y.gtimg.cn/music/photo_new/T002R300x300M000003y8dsH2wBHlo.jpg?max_age=2592000",
-            "url": "http://dl.stream.qqmusic.qq.com/C400000ssz152QNOHo.m4a?vkey=A9759E743164D2CB3E5A392253DC69E66F664727645236E325F1A8E327B7D4EB110E9BB3359953C13C146F2F1ECE077AFA5164D4A9E284C6&guid=7662885136&uin=0&fromtag=66"
+            "song_img": "http://p3.music.126.net/ULlwJ2drOfYv-f6-_7jGGQ==/3250156379592966.jpg?param=130y130",
+            "url": "http://m10.music.126.net/20180510230532/78b6bcc6e5db41f3b25f941a0426b31a/ymusic/f0b5/b93c/5055/d3613eaf16d0d1313048d10963923fb2.mp3"
           }
         ],
         "week": 18,
@@ -50,7 +50,7 @@ export const albumlib = {
       },
       {
         "album_id": 1002,
-        "album_img": "//y.gtimg.cn/music/photo_new/T002R300x300M000002jLGWe16Tf1H.jpg?max_age=2592000",
+        "album_img": "http://p4.music.126.net/o-FjCrUlhyFC96xiVvJZ8g==/109951163111191410.jpg?param=130y130",
         "album_name": "依然范特西",
         "public_time": "2006-09-01",
         "aDate": "2006-09-01",
@@ -78,7 +78,7 @@ export const albumlib = {
             "songname": "听妈妈的话",
             "albumdesc": "",
             "singer": "周杰伦",
-            "song_img": "//y.gtimg.cn/music/photo_new/T002R300x300M000002jLGWe16Tf1H.jpg?max_age=2592000",
+            "song_img": "http://p4.music.126.net/o-FjCrUlhyFC96xiVvJZ8g==/109951163111191410.jpg?param=130y130",
             "url": "http://dl.stream.qqmusic.qq.com/C400002hXDfk0LX9KO.m4a?vkey=31970B9BCDCA4C92E24F83434CBDC47BE1CCE09FF7BC22AE09C0CA685CABD1F1DAF86D03794D62E23D13FD7C75075326F94B2D5EDE3ECBFF&guid=7662885136&uin=0&fromtag=66"
           },
           {
@@ -86,7 +86,7 @@ export const albumlib = {
             "songname": "本草纲目",
             "albumdesc": "",
             "singer": "周杰伦",
-            "song_img": "//y.gtimg.cn/music/photo_new/T002R300x300M000002jLGWe16Tf1H.jpg?max_age=2592000",
+            "song_img": "http://p4.music.126.net/o-FjCrUlhyFC96xiVvJZ8g==/109951163111191410.jpg?param=130y130",
             "url": "http://dl.stream.qqmusic.qq.com/C400001bo9Wy1NfHpb.m4a?vkey=D073DC88A123CC1F73C5F3901855F624B89E16CC58179930C93D9F31D9ECC4BD7A3E638E36920EFEE9CA6B6DA969F19ECCD9FEC46E9585A6&guid=7662885136&uin=0&fromtag=66"
           }
         ],

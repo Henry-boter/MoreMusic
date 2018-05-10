@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import MoreHeader from './components/MoreHeader.vue'
+import MoreHeader from './common/MoreHeader.vue'
 import Player from './components/Player.vue'
 export default {
   name: 'App',

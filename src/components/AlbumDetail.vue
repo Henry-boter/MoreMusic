@@ -30,7 +30,7 @@
   </transition>
 </template>
 <script>
-import Moreheader from '@/components/MoreHeader'
+import Moreheader from '@/common/MoreHeader'
 import {mapActions} from 'vuex'
 export default {
   name: 'AlbumDetail',
@@ -59,7 +59,6 @@ export default {
       })
     },
     selectItem (item, index) {
-      console.log(item)
       this.selectPlay({
         list: this.albumDetail.songs,
         index
