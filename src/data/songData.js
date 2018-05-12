@@ -26,7 +26,7 @@ export const albumlib = {
             "albumdesc": "《是！尚先生》电视剧插曲",
             "singer": "薛之谦",
             "song_img": "http://p3.music.126.net/ULlwJ2drOfYv-f6-_7jGGQ==/3250156379592966.jpg?param=130y130",
-            "url": "http://m10.music.126.net/20180510230359/43d81b5b79395a5f6098a7049064a29b/ymusic/f972/f22a/2eab/a86f84b177c122c899f9a36231b81d95.mp3"
+            "url": "http://fs.w.kugou.com/201805121432/ded34938ff8bc9945a34ff1c1e4ff9ce/G017/M01/10/1D/sYYBAFVb5QaAdZc8AEcQAd70_OI476.mp3"
           },
           {
             "songid": 1000112,
@@ -34,7 +34,7 @@ export const albumlib = {
             "albumdesc": "",
             "singer": "薛之谦",
             "song_img": "http://p3.music.126.net/ULlwJ2drOfYv-f6-_7jGGQ==/3250156379592966.jpg?param=130y130",
-            "url": "http://m10.music.126.net/20180510225908/76fda2502957b35b67b1fd114dc65f29/ymusic/0dd9/d28b/e089/fcbab41f4900212553c5b610c617da2a.mp3"
+            "url": "http://fs.w.kugou.com/201805121459/407c92dcc01b98e8c1726d72f698f7a7/G123/M01/13/1D/uw0DAFqox3OAWe0UAD_HxYp_Ivc469.mp3"
           },
           {
             "songid": 1000113,
@@ -42,7 +42,7 @@ export const albumlib = {
             "albumdesc": "",
             "singer": "薛之谦",
             "song_img": "http://p3.music.126.net/ULlwJ2drOfYv-f6-_7jGGQ==/3250156379592966.jpg?param=130y130",
-            "url": "http://m10.music.126.net/20180510230532/78b6bcc6e5db41f3b25f941a0426b31a/ymusic/f0b5/b93c/5055/d3613eaf16d0d1313048d10963923fb2.mp3"
+            "url": "http://fs.w.kugou.com/201805121458/60595f2c830280e7852224855c843bcb/G010/M07/1D/03/qoYBAFUJw4uAYCPrAEZMtzCkT50885.mp3"
           }
         ],
         "week": 18,
